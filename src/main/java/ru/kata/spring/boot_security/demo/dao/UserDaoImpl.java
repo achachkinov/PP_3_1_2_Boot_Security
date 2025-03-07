@@ -43,4 +43,16 @@ public class UserDaoImpl implements UserDao {
     public void updateUser(User user) {
         entityManager.merge(user);
     }
+
+    @Override
+    public User findByUsername(String username) {
+        EntityGraph<User> entityGraph = entityManager.createEntityGraph(User.class);
+        entityGraph.addAttributeNodes("roles");
+        
+        TypedQuery<User> query = entityManager.createQuery(
+            "SELECT u FROM User u WHERE u.username = :username", User.class);
+        query.setParameter("username", username);
+        query.setHint("javax.persistence.fetchgraph", entityGraph);
+        return query.getResultStream().findFirst().orElse(null);
+    }
 }

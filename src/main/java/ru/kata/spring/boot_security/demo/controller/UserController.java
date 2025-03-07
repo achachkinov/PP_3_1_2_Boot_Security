@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
     
     private final UserService userService;
@@ -19,27 +20,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public String index(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
-        return "index";
-    }
-
-    @PostMapping("/add")
-    public String addUser(@ModelAttribute("newUser") User user) {
-        userService.save(user);
-        return "redirect:/";
-    }
-
-    @PostMapping("/update")
-    public String updateUser(@ModelAttribute("updateUser") User user) {
-        userService.updateUser(user);
-        return "redirect:/";
-    }
-
-    @PostMapping("/delete")
-    public String deleteUser(@RequestParam Long id) {
-        userService.deleteById(id);
-        return "redirect:/";
+        return "user";
     }
 }
