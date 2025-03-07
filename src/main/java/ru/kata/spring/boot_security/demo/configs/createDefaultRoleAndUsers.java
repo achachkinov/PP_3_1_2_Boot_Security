@@ -8,7 +8,6 @@ import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,17 +17,15 @@ public class createDefaultRoleAndUsers implements CommandLineRunner {
 
     private final UserService userService;
     private final RoleService roleService;
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public createDefaultRoleAndUsers(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder) {
+    public createDefaultRoleAndUsers(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         if (userService.getAllUsers().isEmpty()) {
             System.out.println("Adding initial users...");
 
