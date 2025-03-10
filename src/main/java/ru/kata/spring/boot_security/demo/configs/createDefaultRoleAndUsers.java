@@ -38,8 +38,8 @@ public class createDefaultRoleAndUsers implements CommandLineRunner {
             User admin = new User();
             admin.setFirstName("Admin");
             admin.setLastName("Admin");
-            admin.setAge("20");
-            admin.setUsername("admin");
+            admin.setAge(20);
+            admin.setEmail("admin@mail.ru");
             admin.setPassword("admin");
             Set<Role> adminRoles = new HashSet<>();
             adminRoles.add(adminRole);
@@ -48,8 +48,8 @@ public class createDefaultRoleAndUsers implements CommandLineRunner {
             User user = new User();
             user.setFirstName("User");
             user.setLastName("User");
-            user.setAge("20");
-            user.setUsername("user");
+            user.setAge(20);
+            user.setEmail("user@mail.ru");
             user.setPassword("user");
             Set<Role> userRoles = new HashSet<>();
             userRoles.add(userRole);

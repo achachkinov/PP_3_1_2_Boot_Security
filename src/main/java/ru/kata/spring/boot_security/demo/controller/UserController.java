@@ -21,6 +21,6 @@ public class UserController {
 
     @GetMapping("")
     public String index(Model model) {
-        return "user";
+        return "index";
     }
 }

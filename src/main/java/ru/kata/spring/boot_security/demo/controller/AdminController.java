@@ -33,7 +33,7 @@ public class AdminController {
     public String index(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("roles", roleService.getAllRoles());
-        return "admin";
+        return "index";
     }
 
     @PostMapping("/add")

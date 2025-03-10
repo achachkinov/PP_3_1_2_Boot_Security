@@ -28,10 +28,10 @@ public class User implements UserDetails {
    private String lastName;
 
    @Column(name = "Age")
-   private String age;
+   private int age;
 
-   @Column(name = "username")
-   private String username;
+   @Column(name = "email", unique = true, nullable = false)
+   private String email;
 
    @Column(name = "password")
    private String password;
@@ -46,7 +46,7 @@ public class User implements UserDetails {
 
    public User() {}
    
-   public User(String firstName, String lastName, String age) {
+   public User(String firstName, String lastName, int age) {
       this.firstName = firstName;
       this.lastName = lastName;
       this.age = age;
@@ -76,21 +76,20 @@ public class User implements UserDetails {
       this.lastName = lastName;
    }
 
-   public String getAge() {
+   public int getAge() {
       return age;
    }
 
-   public void setAge(String age) {
+   public void setAge(int age) {
       this.age = age;
    }
 
-   @Override
-   public String getUsername() {
-      return username;
+   public String getEmail() {
+      return email;
    }
-   
-   public void setUsername(String username) {
-      this.username = username;
+
+   public void setEmail(String email) {
+      this.email = email;
    }
 
    @Override
@@ -108,6 +107,11 @@ public class User implements UserDetails {
 
    public void setRoles(Collection<Role> roles) {
       this.roles = new HashSet<>( roles );
+   }
+
+   @Override
+   public String getUsername() {
+      return email;
    }
 
    @Override
@@ -134,11 +138,4 @@ public class User implements UserDetails {
    public boolean isEnabled() {
       return true;
    }
-
-   @Override
-   public String toString() {
-      return "firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + ", username="
-            + username + ", roles=" + roles;
-   }
-
 }
