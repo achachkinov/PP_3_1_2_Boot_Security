@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.*;
 import javax.transaction.*;
@@ -45,7 +46,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findByUsername(String username) {
+    public Optional<User> findByUsername(String username) {
         EntityGraph<User> entityGraph = entityManager.createEntityGraph(User.class);
         entityGraph.addAttributeNodes("roles");
         
@@ -53,6 +54,6 @@ public class UserDaoImpl implements UserDao {
             "SELECT u FROM User u WHERE u.username = :username", User.class);
         query.setParameter("username", username);
         query.setHint("javax.persistence.fetchgraph", entityGraph);
-        return query.getResultStream().findFirst().orElse(null);
+        return query.getResultStream().findFirst();
     }
 }
