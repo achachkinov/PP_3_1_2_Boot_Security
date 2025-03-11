@@ -8,7 +8,23 @@
 </head>
 <body>
     <div th:fragment="adminPage">
-        <h2>Admin panel</h2>
+        <h1>Admin panel</h1>
+        <ul class="nav nav-tabs" id="adminPageTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="users-table" data-bs-toggle="tab" data-bs-target="#users-table-card" type="button" role="tab" aria-controls="home" aria-selected="true">  Users table </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="new-user" data-bs-toggle="tab" data-bs-target="#new-user-card" type="button" role="tab" aria-controls="profile" aria-selected="false"> New Users </button>
+            </li>
+        </ul>
+        <div class="tab-content" id="adminPageTabsContent">
+            <div class="tab-pane fade show active" id="users-table-card" role="tabpanel" aria-labelledby="users-table">
+                <div th:replace="~{fragments/usersTable :: usersTable}"></div>
+            </div>
+            <div class="tab-pane fade" id="new-user-card" role="tabpanel" aria-labelledby="new-user">
+                <div th:replace="~{fragments/newUser :: newUser}"></div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

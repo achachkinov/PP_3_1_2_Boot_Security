@@ -10,7 +10,11 @@
     <div th:fragment="header" >
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
             <div class="container-fluid">
-                <a class="navbar-brand">  </a>
+                <div class="navbar-brand">
+                    <span th:text="${#authentication.principal.email}"></span>
+                    <span> with roles: </span>
+                    <span th:each="role : ${#authentication.principal.authorities}" th:text="${role.authority}" th:remove="tag"></span>
+                </div>
                 <div class="navbar-text" > <a th:href="@{/logout}">Logout</a> </div>
             </div>
         </nav>

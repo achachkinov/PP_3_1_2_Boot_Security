@@ -10,4 +10,9 @@ public class LogoutController {
     public String logout() {
         return "redirect:/login?logout";
     }
+
+    @GetMapping("")
+     public String index() {
+         return "login"; // Or another view name
+     }
 }

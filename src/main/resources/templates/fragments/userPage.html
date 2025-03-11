@@ -8,9 +8,35 @@
 </head>
 <body>
     <div th:fragment="userPage">
-        <h2>User information-page</h2>
-        <div> 
-            
+        <h1>User information-page</h1>
+        <div class="card">
+            <div class="card-header"> About user </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th> ID </th>
+                            <th> First Name </th>
+                            <th> Last Name </th>
+                            <th> Age </th>
+                            <th> Email </th>
+                            <th> Role </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td th:text="${#authentication.principal.id}" ></td>
+                            <td th:text="${#authentication.principal.firstName}" ></td>
+                            <td th:text="${#authentication.principal.lastName}" ></td>
+                            <td th:text="${#authentication.principal.age}" ></td>
+                            <td th:text="${#authentication.principal.email}" ></td>
+                            <td>
+                                <span th:each="role : ${#authentication.principal.authorities}" th:text="${role.authority} " th:remove="tag"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>
