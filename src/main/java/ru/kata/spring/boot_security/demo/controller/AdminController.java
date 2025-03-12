@@ -37,17 +37,13 @@ public class AdminController {
     }
 
     @PostMapping("/add")
-    public String addUser(@ModelAttribute("newUser") User user, @RequestParam("roles") List<Long> rolesId) {
-        List<Role> roles = roleService.findRolesById( rolesId );
-        user.setRoles(roles);
+    public String addUser(@ModelAttribute("newUser") User user ) {
         userService.save(user);
         return "redirect:/admin";
     }
 
     @PostMapping("/update")
-    public String updateUser(@ModelAttribute("updateUser") User user, @RequestParam("roles") List<Long> rolesId) {
-        List<Role> roles = roleService.findRolesById( rolesId );
-        user.setRoles(roles);
+    public String updateUser(@ModelAttribute("updateUser") User user ) {
         userService.updateUser(user);
         return "redirect:/admin";
     }
