@@ -44,13 +44,13 @@ public class RESTController {
 
     @PutMapping("users")
     public User updateUser(@RequestBody User user) {
-        System.out.println("Received user for update: " + user.toString());
         userService.updateUser(user);
         return user;
     }
 
     @DeleteMapping("users/{id}")
     public String deleteUser(@PathVariable Long id) {
+        System.out.println( "whats" );
         userService.deleteById(id);
         return "User with id = " + id + " was deleted";
     }

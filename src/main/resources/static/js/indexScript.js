@@ -166,6 +166,8 @@ function createButtonListener() {
     addListenerToEditModal( editModalForm )
     const deleteModalForm = document.getElementById('deleteButton');
     addListenerToDeleteModal( deleteModalForm )
+    const addModalForm = document.getElementById('addButton');
+    addListenerToAddModal( addModalForm )
 }
 
 function addListenerToEditModal( editModalForm ) {
@@ -230,10 +232,71 @@ function addListenerToDeleteModal( deleteModalForm ) {
 async function deleteUser(userId) {
     const response = await fetch(`${url}/${userId}`, {
         method: 'DELETE',
-        'X-CSRF-TOKEN': csrfToken,
+        headers: {
+            'X-CSRF-TOKEN': csrfToken, // Add this line
+        },
     });
     if (!response.ok) {
         console.error('Error deleting user:', response.statusText);
+    } else {
+        updatePage();
+    }
+}
+
+function addListenerToAddModal( addModalForm ) {
+    addModalForm.addEventListener('click', async (event) => {
+        event.preventDefault();
+
+        const firstName = document.getElementById('addFirstName').value;
+        const lastName = document.getElementById('addLastName').value;
+        const age = document.getElementById('addAge').value;
+        const email = document.getElementById('addEmail').value;
+        const password = document.getElementById('addPassword').value;
+
+        document.getElementById('addFirstName').value = ''
+        document.getElementById('addLastName').value = ''
+        document.getElementById('addAge').value = ''
+        document.getElementById('addEmail').value = ''
+        document.getElementById('addPassword').value = ''
+
+
+        const roleSelect = document.getElementById('addRoles');
+        const selectedRoles = Array.from(roleSelect.selectedOptions).map(option => ({
+            id: parseInt(option.value, 10),
+            roleName: option.textContent,
+        }));
+
+        for (let i = 0; i < roleSelect.options.length; i++) {
+            roleSelect.options[i].selected = false;
+        }
+
+        const user = {
+            firstName: firstName,
+            lastName: lastName,
+            age: age,
+            email: email,
+            password: password,
+            roles: selectedRoles
+        };
+        await addUser(user);
+        
+        const adminTab = document.getElementById('users-table');
+        adminTab.click();
+    })
+}
+
+async function addUser( user ) {
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken,
+        },
+        body: JSON.stringify(user),
+    });
+
+    if (!response.ok) {
+        console.error('Error add user:', response.statusText);
     } else {
         updatePage();
     }
