@@ -7,8 +7,15 @@ import javax.persistence.*;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "roles")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Role implements GrantedAuthority {
     
     @Id

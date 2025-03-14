@@ -13,8 +13,15 @@ import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "users")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class User implements UserDetails {
 
    @Id

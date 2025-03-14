@@ -33,7 +33,7 @@
                             <label for="password" class="form-label text-center w-100 fw-bold">Password</label>
                             <input type="password" class="form-control" id="password" name="password">
                         </div>
-                        <select id="roles" name="roles" multiple required>
+                        <select id="roles" name="roles" multiple>
                             <label for="password" class="form-label text-center w-100 fw-bold">Role</label>
                             <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.getRoleName()}"></option>
                         </select>
