@@ -10,12 +10,12 @@ import org.springframework.ui.Model;
 
 @Controller
 @RequestMapping("/homePage")
-public class homePageController {
+public class HomePageController {
     
     private final RoleService roleService;
 
     @Autowired
-    public homePageController(RoleService roleService) {
+    public HomePageController(RoleService roleService) {
         this.roleService = roleService;
     }
 

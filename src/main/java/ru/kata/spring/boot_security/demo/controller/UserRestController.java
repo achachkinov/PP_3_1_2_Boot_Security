@@ -18,11 +18,11 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 
 @RestController
 @RequestMapping("/api")
-public class RESTController {
+public class UserRestController {
 
     private UserService userService;
 
-    public RESTController(UserService userService) {
+    public UserRestController(UserService userService) {
         this.userService = userService;
     }
 

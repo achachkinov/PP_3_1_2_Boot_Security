@@ -13,13 +13,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
-public class createDefaultRoleAndUsers implements CommandLineRunner {
+public class CreateDefaultRoleAndUsers implements CommandLineRunner {
 
     private final UserService userService;
     private final RoleService roleService;
 
     @Autowired
-    public createDefaultRoleAndUsers(UserService userService, RoleService roleService) {
+    public CreateDefaultRoleAndUsers(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
